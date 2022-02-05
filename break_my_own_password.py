@@ -28,6 +28,10 @@ modulo_result = dict()
 for i in (123, 456, 789, 987, 654, 321):
     modulo_result[hex(i)] = hex(checksum % i)
 
+
+print([key for key in modulo_result.keys()])
+print([modulo_result[key] for key in modulo_result.keys()])
+
 print(modulo_result)
 exit(0)
 
