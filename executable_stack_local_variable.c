@@ -223,7 +223,7 @@ int main(int argc,char **argv)
         {
             if ((passwdChecksum % modulo_value[i]) != modulo_result[i])
             {
-                printf("Invalid password! - invalid password checksum\n");
+                printf("Invalid password!\n");
                 return 0;
             }
         }
@@ -251,7 +251,7 @@ int main(int argc,char **argv)
         uint32_t expectedCodeChecksum = 0x201b0f;
         if (codeChecksum != expectedCodeChecksum)
         {
-            printf("Invalid password! - invalid code checksum\n");
+            printf("Invalid password!\n");
             return 0;
         }
 
