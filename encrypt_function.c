@@ -4,6 +4,20 @@
 #include <stdint.h>
 
 
+static unsigned long int random_next = 1;
+
+void my_srand(unsigned int seed)  /* RAND_MAX assumed to be 32767. */
+{
+    random_next = seed;
+}
+
+int my_rand(void)  /* RAND_MAX assumed to be 32767. */
+{
+    random_next = random_next * 1103515245 + 12345;
+    return (unsigned)(random_next/65536) % 32768;
+}
+
+
 int main()
 {
 
@@ -49,9 +63,14 @@ int main()
 
     printf("Code start\n");
 
+    my_srand(passwdChecksum);
+
     for (int i = 0; i < sizeof(a_out); i++)
     {
-        uint8_t decrypt_byte = (passwdChecksum  >> ((i % 4) * 8)) & 0xFF;
+
+        uint8_t decrypt_byte = my_rand() & 0xFF;
+
+        //uint8_t decrypt_byte = (passwdChecksum  >> ((i % 4) * 8)) & 0xFF;
         //printf("Decrpyt byte: %x\n", decrypt_byte);
         //printf("byte: %x, data:0x%2x, \n", decrypt_byte, decrypt_byte ^ a_out[i]);  
         printf("0x%02x, ", decrypt_byte ^ a_out[i]);
